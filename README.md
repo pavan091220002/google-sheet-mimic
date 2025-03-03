@@ -68,3 +68,29 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+
+**Spreadsheet Interface:**
+
+    Google Sheets-like UI with toolbar, formula bar, and grid layout
+    Drag-and-drop functionality for cells and ranges
+    Cell dependency tracking with automatic updates
+    Formatting options: Bold, italics, font size, color
+    Row/Column management: Add/delete rows/columns, resize controls
+    Implement additional mathematical and data quality functions.
+    Add support for more complex formulas and cell referencing (e.g., relative and absolute references).
+    Allow users to save and load their spreadsheets.
+    Incorporate data visualization capabilities (e.g., charts, graphs).
+    Implement additional mathematical and data quality functions.
+
+
+**Mathematical Functions:**
+
+    SUM(), AVERAGE(), MAX(), MIN(), COUNT()
+    TRIM(), UPPER(), LOWER(), REMOVE_DUPLICATES(), FIND_AND_REPLACE()
+
+**Data Entry Validations:**
+
+    Allow users to input various data types (numbers, text, dates).
+    Implement basic data validation checks
+

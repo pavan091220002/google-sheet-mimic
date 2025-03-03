@@ -1,38 +1,354 @@
-.App {
+/* Toolbar styles */
+/* Button feedback animations */
+.toolbar-button {
+  transition: all 0.15s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.toolbar-button:active {
+  transform: scale(0.95);
+}
+
+.toolbar-button::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.2s ease, height 0.2s ease;
+}
+
+.toolbar-button:active::after {
+  width: 120px;
+  height: 120px;
+}
+
+/* Active state styling */
+.toolbar-button.active {
+  background: #e8f0fe !important;
+  color: #1967d2 !important;
+  border-color: #1967d2 !important;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.toolbar-button.active strong,
+.toolbar-button.active em,
+.toolbar-button.active u {
+  color: #1967d2;
+}
+
+/* Google-style hover states */
+.toolbar-button:hover {
+  background: #f1f3f4;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+}
+
+/* Heading styles */
+h1 {
   text-align: center;
+  margin-bottom: 20px; /* Add some space below the heading */
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* Grid styles */
+.grid-container {
+  height: calc(100vh - 60px); /* Set a fixed height for the grid container */
+  overflow: auto; /* Make the grid scrollable */
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+table {
+  border-collapse: collapse;
+  width: 100%;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+td {
+  border: 2px solid #ddd;
+  padding: 5px;
+}
+
+input {
+  width: 100%;
+  border: none;
+  outline: none;
+}
+
+th,
+td {
+  position: relative;
+}
+
+.resizer {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 3px;
+  height: 100%;
+  cursor: col-resize;
+  background: #ccc;
+}
+
+.resizer:hover {
+  background: #00bcd4; /* Highlight color on hover */
+}
+
+.selected {
+  background-color: #e0f7fa; /* Light blue background */
+  border: 0.5px solid #00bcd4; /* Blue border */
+}
+
+.selecting-cursor {
+  cursor: cell; /* Default cursor for selection */
+}
+
+/* Add this rule to change the cursor to a plus sign when hovering over cells during selection */
+.selecting-cursor td {
+  cursor: cell;
+}
+
+/* Add this rule to style the plus cursor when hovering over the grid */
+.selecting-cursor .selected {
+  cursor: cell;
+}
+
+.selection-indicator {
+  position: absolute;
+  bottom: 2px;
+  right: 2px;
+  width: 8px;
+  height: 8px;
+  background-color: #00bcd4; /* Blue color */
+  border-radius: 50%; /* Circular handle */
+  cursor: crosshair; /* Cross cursor to indicate dragging */
+  display: none; /* Hidden by default */
+}
+
+/* Show the selection indicator only when a cell is selected */
+.selected .selection-indicator {
+  display: block;
+}
+
+/* Function menu styles */
+.function-menu {
+  position: absolute;
+  top: 50px;
+  left: 600px;
+  background-color: white;
+  border: 1px solid #dadce0;
+  border-radius: 4px;
+  padding: 10px;
+  z-index: 1000;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 200px; /* Adjust width as needed */
+}
+
+.function-buttons {
+  margin-top: 20px; /* Space for the close button */
+}
+
+.function-menu button {
+  display: block;
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 5px;
+  background-color: #ffffff;
+  color: #202124;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+
+.function-menu button:hover {
+  background-color: #f1f3f4;
+}
+
+
+.close-menu-button {
+  position: flex;
+  top: 8px;  /* Adjusted for better positioning */
+  right: 8px; /* Adjusted for better positioning */
+  background-color: transparent; /* No background for a cleaner look */
+  color: #ff4444; /* Red color for the '×' */
+  border: none;
+  border-radius: 50%;
+  width: 20px; /* Slightly smaller */
+  height: 20px; /* Slightly smaller */
+  font-size: 18px; /* Increased for better visibility */
+  cursor: pointer;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  padding: 0;
+  transition: color 0.3s ease;
+  font-weight: bold;
+}
+
+.close-menu-button:hover {
+  color: #cc0000; /* Darker red on hover */
+}
+/* Toolbar styles */
+.toolbar {
+  display: flex;
+  gap: 10px;
+  padding: 10px;
+  background-color: #f4f4f4;
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 20px;
+  flex-wrap: wrap; /* Allow buttons to wrap to the next line if needed */
+}
+
+.styling-group {
+  display: flex;
+  gap: 10px;
+  align-items: center; /* Align buttons and inputs vertically */
+}
+
+.toolbar button {
+  padding: 5px 10px;
+  cursor: pointer;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  border-radius: 4px;
+  margin-right: 5px;
+}
+
+.toolbar button:hover {
+  background-color: #f0f0f0;
+}
+
+.toolbar input[type="color"] {
+  width: 30px;
+  height: 30px;
+  padding: 2px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.toolbar input[type="number"] {
+  width: 80px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+.chart-menu {
+  position: absolute;
+  top: 50px;
+  left: 400px;
+  background-color: white;
+  border: 1px solid #ccc;
+  padding: 10px;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.chart-menu input {
+  padding: 1px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.chart-menu select {
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.chart-menu button {
+  padding: 5px 10px;
+  background-color: #007bff;
   color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
 }
 
-.App-link {
-  color: #61dafb;
+.chart-menu button:hover {
+  background-color: #0056b3;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* Chart Canvas Styles */
+canvas {
+  margin-top: 20px;
+  max-width: 800px;
+  max-height: 400px;
+}
+/* Chart Container Styles */
+/* Chart Container Styles */
+.chart-container {
+  position: fixed;
+  top: 65%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 13px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  z-index: 1000;
+}
+
+.toolbar-button {
+  position: relative;
+  transition: all 0.2s ease;
+  background: #ffffff;
+  border: 1px solid #dadce0;
+  color: #5f6368;
+}
+
+/* Active State */
+.toolbar-button.active {
+  background: #e8f0fe !important;
+  border-color: #1967d2 !important;
+}
+
+.toolbar-button.active strong,
+.toolbar-button.active em,
+.toolbar-button.active u {
+  color: #1967d2 !important;
+}
+
+/* Mixed State */
+.toolbar-button.mixed {
+  background: #f8f9fa !important;
+  border-color: #dadce0 !important;
+}
+
+.toolbar-button.mixed::after {
+  content: "•";
+  position: absolute;
+  bottom: 3px;
+  right: 5px;
+  font-size: 12px;
+  color: #5f6368;
+  line-height: 1;
+}
+
+/* Hover States */
+.toolbar-button:hover:not(.active):not(.mixed) {
+  background: #f1f3f4;
+  border-color: #dadce0;
+}
+
+/* Click Animation */
+.toolbar-button:active {
+  transform: scale(0.95);
+}
+.developer-heading {
+  font-size: 18px;
+  font-family: 'Arial', sans-serif;
+  color: #333;
+  text-align: center;
+  margin-top: 20px;
+  padding: 10px;
+  background-color: #f4f4f4;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
