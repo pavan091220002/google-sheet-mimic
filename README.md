@@ -1,6 +1,78 @@
-# Getting Started with Create React App
+# Spreadsheet Application
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A Google Sheets-like web application built with React that allows users to create, edit, and manage spreadsheet data with formula support, data visualization, and data quality features.
+
+## Technology Stack
+
+### Frontend
+- **React**: Chosen for its component-based architecture which makes it ideal for building a complex UI with reusable components like cells, rows, and toolbars
+- **JavaScript (ES6+)**: Provides modern language features for handling complex spreadsheet operations
+- **CSS3**: Used for styling and responsive design
+- **Chart.js**: Implemented for data visualization capabilities
+
+### Architecture & Data Structures
+
+#### Core Data Structure
+The application uses a two-dimensional array as the primary data structure for the spreadsheet grid:
+```javascript
+const [data, setData] = useState(Array(numRows).fill().map(() => Array(numCols).fill('')));
+```
+
+This structure was chosen for:
+- Direct cell access using row and column indices (O(1) time complexity)
+- Intuitive representation of the grid layout
+- Easy serialization for saving/loading functionality
+
+#### Formula Evaluation
+The application implements a custom formula parser and evaluator in `utils.js` that:
+- Handles cell references (A1, B2, etc.)
+- Supports range references (A1:C3)
+- Implements mathematical functions (SUM, AVERAGE, MAX, MIN, COUNT, etc.)
+- Maintains a dependency graph for automatic recalculation
+
+#### State Management
+React's useState and useEffect hooks manage:
+- Cell data and formatting
+- Selected cells tracking
+- Undo/redo history
+- Formula bar state
+
+#### UI Components
+- **Toolbar**: Contains formatting controls and spreadsheet operations
+- **Grid**: Renders the spreadsheet with row/column headers
+- **FormulaBar**: Allows direct formula entry and editing
+- **ContextMenu**: Provides right-click functionality
+
+## Features
+
+- **Cell Formatting**: Bold, italic, underline, font size, color
+- **Formula Support**: Mathematical functions (SUM, AVERAGE, MAX, MIN, COUNT, PRODUCT, STDEV, MEDIAN)
+- **Data Quality Functions**: TRIM, UPPER, LOWER, removal of duplicates, find and replace
+- **Data Types**: Support for text, numbers, and dates
+- **Row/Column Management**: Add/delete rows and columns
+- **Save/Load**: Persistence of spreadsheet data
+- **Data Visualization**: Chart generation based on selected data
+
+## Implementation Details
+
+### Cell References and Formula Evaluation
+The application implements a custom algorithm to evaluate formulas:
+1. Parse the formula to identify function name and arguments
+2. Resolve cell references to their actual values
+3. Apply the appropriate mathematical function
+4. Handle errors gracefully
+
+### Performance Considerations
+- Selective re-rendering using React's memo and careful state management
+- Efficient formula evaluation by caching intermediate results
+- Optimized range operations for large data sets
+
+## Future Enhancements
+- Collaborative editing using WebSockets
+- Advanced cell formatting options
+- Mobile-responsive design
+- Import/export to CSV and Excel formats
+- More advanced chart types and customization options
 
 ## Available Scripts
 
@@ -8,23 +80,23 @@ In the project directory, you can run:
 
 ### `npm start`
 
-Runs the app in the development mode.\
+Runs the app in the development mode.
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
+The page will reload when you make changes.
 You may also see any lint errors in the console.
 
 ### `npm test`
 
-Launches the test runner in the interactive watch mode.\
+Launches the test runner in the interactive watch mode.
 See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
 ### `npm run build`
 
-Builds the app for production to the `build` folder.\
+Builds the app for production to the `build` folder.
 It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
+The build is minified and the filenames include the hashes.
 Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
@@ -68,29 +140,3 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-
-
-**Spreadsheet Interface:**
-
-    Google Sheets-like UI with toolbar, formula bar, and grid layout
-    Drag-and-drop functionality for cells and ranges
-    Cell dependency tracking with automatic updates
-    Formatting options: Bold, italics, font size, color
-    Row/Column management: Add/delete rows/columns, resize controls
-    Implement additional mathematical and data quality functions.
-    Add support for more complex formulas and cell referencing (e.g., relative and absolute references).
-    Allow users to save and load their spreadsheets.
-    Incorporate data visualization capabilities (e.g., charts, graphs).
-    Implement additional mathematical and data quality functions.
-
-
-**Mathematical Functions:**
-
-    SUM(), AVERAGE(), MAX(), MIN(), COUNT()
-    TRIM(), UPPER(), LOWER(), REMOVE_DUPLICATES(), FIND_AND_REPLACE()
-
-**Data Entry Validations:**
-
-    Allow users to input various data types (numbers, text, dates).
-    Implement basic data validation checks
-
